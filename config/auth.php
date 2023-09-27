@@ -13,10 +13,10 @@ return [
     |
     */
 
-    'defaults' => [
-        'guard' => 'web',
-        'passwords' => 'users',
-    ],
+    // 'defaults' => [
+    //     'guard' => 'web',
+    //     'passwords' => 'users',
+    // ],
     
     'defaults' => [
         'guard' => 'api',
@@ -50,6 +50,12 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+
+        'maintenancetechnician' => [
+            'driver' => 'jwt',
+            'provider' => 'maintenances',
+            'hash' => false,
+        ],
     ],
 
     /*
@@ -74,6 +80,11 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
+
+        'maintenances' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\MaintenanceTechnician::class,
+        ]
 
         // 'users' => [
         //     'driver' => 'database',

@@ -28,12 +28,12 @@ use App\Models\Emergency;
 */
 
 Route::post('/login', [AuthController::class, 'login']);
+Route::post('/loginmaint', [MaintenanceTechnicianController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 
 Route::group(['middleware' => 'jwt.auth'], function () {
 
 //////// Auth
-//Route::post('/update_profile', [AuthController::class, 'update']);
 Route::patch('/users/{user}',[AuthController::class, 'update']);
 Route::post('/logout', [AuthController::class, 'logout']);
 Route::get('/user-profile', [AuthController::class, 'userProfile']);
@@ -58,9 +58,11 @@ Route::delete('/calls/{call}',[CallTechnicianController::class,'destroy']);
 
 /////// MaintenanceTechnician
 
-Route::get('/maintenance',[MaintenanceTechnicianController::class,'index']);
-Route::post('/maintenance',[MaintenanceTechnicianController::class,'store']);
-
+Route::get('/maintenances',[MaintenanceTechnicianController::class, 'index']);
+Route::post('/maintenances',[MaintenanceTechnicianController::class, 'store']);
+//Route::post('/maintenances/{maintenance}',[MaintenanceTechnicianController::class, 'update']);
+Route::get('/maintenances/{maintenance}',[MaintenanceTechnicianController::class, 'show']);
+Route::delete('/maintenances/{maintenance}',[MaintenanceTechnicianController::class, 'destroy']);
 
 //// Post
 
@@ -76,28 +78,19 @@ Route::post('/hosts',[HostController::class,'store']);
 
 Route::get('/history',[MaintenanceTechnicianController::class,'getHistory']);
 
-});
 
+/////////dashboard/////Home
 
-    //dashboard
-Route::group(['prefix' => 'dashboard'],function ($router) {
 Route::get('/homes',[HomeController::class, 'index']);
 Route::post('/homes',[HomeController::class, 'store']);
 Route::post('/homes/{home}',[HomeController::class, 'update']);
 Route::get('/homes/{home}',[HomeController::class, 'show']);
 Route::delete('/homes/{home}',[HomeController::class, 'destroy']);
 
-Route::get('/maintenances',[MaintenanceTechnicianController::class, 'index']);
-Route::post('/maintenances',[MaintenanceTechnicianController::class, 'store']);
-Route::post('/maintenances/{maintenance}',[MaintenanceTechnicianController::class, 'update']);
-Route::get('/maintenances/{maintenance}',[MaintenanceTechnicianController::class, 'show']);
-Route::delete('/maintenances/{maintenance}',[MaintenanceTechnicianController::class, 'destroy']);
 });
+
 
 Route::post('/email-verification',[EmailVerifyController::class,'emailVerification']);
 Route::post('forget-password',[ForgetPasswordController::class,'forgetPassword']);
 Route::post('reset-password',[ResetPasswordController::class,'resetPassword']);
 
-
-Route::get('/chat/{user_id}', [ChatController::class, 'chat']);
-Route::post('/chat/{user_id}', [ChatController::class, 'sendMessage']);

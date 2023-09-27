@@ -3,12 +3,19 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
+use Laravel\Sanctum\HasApiTokens;
 
-class MaintenanceTechnician extends Model
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Hash;
+
+class MaintenanceTechnician extends Authenticatable implements JWTSubject
 {
-    use HasFactory;
+    use HasApiTokens, HasFactory;
     protected $guarded = ['id'];
+    protected $guard = 'maintenancetechnician';
+
     public function setImageAttribute ($image){
         $newImageName = uniqid() . '_' . 'maintenance_image' . '.' . $image->extension();
         $image->move(public_path('maintenance_image') , $newImageName);
@@ -23,4 +30,17 @@ class MaintenanceTechnician extends Model
         return $this->hasMany(CallTechnician::class);
     }
 
+    public function setPasswordAttribute($password){
+        return $this->attributes['password'] = Hash::make($password);
+    }
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
 }

@@ -20,6 +20,7 @@ class StoreMaintenanceTechnicianRequest extends FormRequest
         return [
             'name' => 'required|string',
             'email' => 'required|email|unique:maintenance_technicians,email',
+            'phone' => 'required|max:100|unique:maintenance_technicians',
             'password' => 'required|min:7',
             'image'  => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
             'stuts' => 'required|string',
