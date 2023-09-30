@@ -34,6 +34,7 @@ class CallTechnicianController extends Controller
         return CallTechnicianResource::make($callTechnician);
     }
 
+
     public function show(CallTechnician $callTechnician) {
         // if (Checker::isParamsFoundInRequest()){
         //     return Checker::CheckerResponse();

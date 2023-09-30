@@ -31,10 +31,10 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/loginmaint', [MaintenanceTechnicianController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 
-Route::group(['middleware' => 'jwt.auth'], function () {
+//Route::group(['middleware' => 'jwt.auth'], function () {
 
 //////// Auth
-Route::patch('/users/{user}',[AuthController::class, 'update']);
+Route::post('/users/{user}',[AuthController::class, 'update']);
 Route::post('/logout', [AuthController::class, 'logout']);
 Route::get('/user-profile', [AuthController::class, 'userProfile']);
 
@@ -68,6 +68,8 @@ Route::delete('/maintenances/{maintenance}',[MaintenanceTechnicianController::cl
 
 Route::get('/posts',[PostController::class,'index']);
 Route::post('/posts',[PostController::class,'store']);
+Route::get('/recentlyadd',[PostController::class,'recentlyAdd']);
+Route::get('/gettodaysposts',[PostController::class,'getTodaysPosts']);
 
 //// Hosts
 
@@ -77,6 +79,7 @@ Route::post('/hosts',[HostController::class,'store']);
 ///// History
 
 Route::get('/history',[MaintenanceTechnicianController::class,'getHistory']);
+Route::get('/recently',[MaintenanceTechnicianController::class,'recentlyAdd']);
 
 
 /////////dashboard/////Home
@@ -87,7 +90,7 @@ Route::post('/homes/{home}',[HomeController::class, 'update']);
 Route::get('/homes/{home}',[HomeController::class, 'show']);
 Route::delete('/homes/{home}',[HomeController::class, 'destroy']);
 
-});
+//});
 
 
 Route::post('/email-verification',[EmailVerifyController::class,'emailVerification']);

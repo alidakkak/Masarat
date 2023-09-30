@@ -11,9 +11,12 @@ class Message extends Model
 
     use HasFactory,SoftDeletes;
     protected $fillable = ["user_id","type","body"];
+    
+    /// User
     public function sender(){
         return $this->belongsTo(User::class,"user_id");
     }
+
     public function recipients()
     {
         return $this->hasMany(Recipient::class);

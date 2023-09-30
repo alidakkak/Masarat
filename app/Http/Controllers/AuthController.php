@@ -62,10 +62,12 @@ class AuthController extends Controller
 
 
     public function update(Request $request , User $user){
+        //return $request;
         $request->validate([
-            'name' => 'string|required',
-            'email' => 'required|email|unique:users,email,' . $user->id,
-            'phone' => 'required|string'
+            'name' => 'string',
+            'email' => 'email|unique:users,email,' . $user->id,
+            'phone' => 'string',
+            'address' => 'string'
         ]);
         $user->update($request->all());
         return response()->json([

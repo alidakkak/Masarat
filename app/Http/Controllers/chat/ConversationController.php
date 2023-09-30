@@ -34,8 +34,6 @@ class ConversationController extends Controller
             }
         ])->get();
 
-
-
         $ConversationTransformer = [];
         foreach ($conversations as $index => $conversation) {
             $ConversationTransformer[$index] = fractal($conversation, new IndexTransformer())->toArray();
@@ -43,10 +41,12 @@ class ConversationController extends Controller
         }
         return $this->returnData("conversations", $ConversationTransformer, "count_conversations", $conversations->count());
     }
+
+
     public function show(Request $request)
     {
         $conversation_id = $request->conversation_id;
-        $conversation = Conversation::find(3);
+        $conversation = Conversation::findOrFail($conversation_id);
         $messages = $conversation->messages()->with('sender')->orderByDesc("id")->get();
         $MessageTransformer = [];
         foreach ($messages as $index => $message) {
@@ -55,6 +55,8 @@ class ConversationController extends Controller
         }
         return $this->returnData("messages", $MessageTransformer, "count_messages", $messages->count());
     }
+
+
     public function NumberOfUnreadMessage()
     {
 
@@ -62,6 +64,8 @@ class ConversationController extends Controller
         $unread_message = $user->unreadmessage();
         return $this->returnData("Number_Of_Unread_Messages", $unread_message);
     }
+
+
     public function markAsRead(Request $request)
     {
         $conversation_id = $request->conversation_id;
@@ -73,5 +77,15 @@ class ConversationController extends Controller
                 'read_at' => Carbon::now(),
             ]);
         return $this->returnData("message", 'Messages marked as read');
+    }
+
+    public function delete($id) {
+        Recipient::where([
+            'user_id' => Auth::id(),
+            'message_id' => $id
+        ])->delete();
+        return [
+            'message' => 'Deleted SuccesFully'
+        ];
     }
 }

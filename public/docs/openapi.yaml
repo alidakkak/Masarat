@@ -1,0 +1,1362 @@
+openapi: 3.0.3
+info:
+  title: Laravel
+  description: ''
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost'
+paths:
+  /api/login:
+    post:
+      summary: ''
+      operationId: postApiLogin
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                phone:
+                  type: string
+                  description: "'email' => 'required|email',."
+                  example: ad
+                password:
+                  type: string
+                  description: 'Must be at least 6 characters.'
+                  example: '-MUa#iE!wOGAN['
+              required:
+                - phone
+                - password
+      security: []
+  /api/loginmaint:
+    post:
+      summary: ''
+      operationId: postApiLoginmaint
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                phone:
+                  type: string
+                  description: "'email' => 'required|email',."
+                  example: tenetur
+                password:
+                  type: string
+                  description: 'Must be at least 6 characters.'
+                  example: 't/):@kQXrw4XNH1j"'
+              required:
+                - phone
+                - password
+      security: []
+  /api/register:
+    post:
+      summary: ''
+      operationId: postApiRegister
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Must be between 2 and 100 characters.'
+                  example: ua
+                email:
+                  type: string
+                  description: 'Must be a valid email address. Must not be greater than 100 characters.'
+                  example: maria36@example.org
+                phone:
+                  type: string
+                  description: 'Must not be greater than 100 characters.'
+                  example: 'y'
+                password:
+                  type: string
+                  description: 'Must be at least 6 characters.'
+                  example: '[y#0qCiS'
+              required:
+                - name
+                - email
+                - phone
+                - password
+      security: []
+  '/api/users/{user_id}':
+    patch:
+      summary: ''
+      operationId: patchApiUsersUser_id
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: ''
+                  example: velit
+                email:
+                  type: string
+                  description: ''
+                  example: null
+                phone:
+                  type: string
+                  description: ''
+                  example: quaerat
+              required:
+                - name
+                - phone
+      security: []
+    parameters:
+      -
+        in: path
+        name: user_id
+        description: 'The ID of the user.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+  /api/logout:
+    post:
+      summary: ''
+      operationId: postApiLogout
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/user-profile:
+    get:
+      summary: ''
+      operationId: getApiUserProfile
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  /api/emergencys:
+    get:
+      summary: ''
+      operationId: getApiEmergencys
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      id: 2
+                      services: power
+                      image: /emergency_images/6513cd6edc0a3_emergency_image.jpg
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 2
+                        services: power
+                        image: /emergency_images/6513cd6edc0a3_emergency_image.jpg
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 2
+                        services:
+                          type: string
+                          example: power
+                        image:
+                          type: string
+                          example: /emergency_images/6513cd6edc0a3_emergency_image.jpg
+      tags:
+        - Endpoints
+      security: []
+    post:
+      summary: ''
+      operationId: postApiEmergencys
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                services:
+                  type: string
+                  description: ''
+                  example: nesciunt
+                image:
+                  type: string
+                  format: binary
+                  description: 'Must be an image. Must not be greater than 2048 kilobytes.'
+                maintenance_technician_ids:
+                  type: array
+                  description: ''
+                  example: null
+                  items:
+                    type: string
+              required:
+                - services
+      security: []
+  '/api/emergencys/{emergency_id}':
+    post:
+      summary: ''
+      operationId: postApiEmergencysEmergency_id
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    get:
+      summary: ''
+      operationId: getApiEmergencysEmergency_id
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 2
+                    services: power
+                    image: /emergency_images/6513cd6edc0a3_emergency_image.jpg
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 2
+                      services:
+                        type: string
+                        example: power
+                      image:
+                        type: string
+                        example: /emergency_images/6513cd6edc0a3_emergency_image.jpg
+      tags:
+        - Endpoints
+      security: []
+    delete:
+      summary: ''
+      operationId: deleteApiEmergencysEmergency_id
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: emergency_id
+        description: 'The ID of the emergency.'
+        example: 2
+        required: true
+        schema:
+          type: integer
+  /api/search:
+    post:
+      summary: ''
+      operationId: postApiSearch
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/calls:
+    get:
+      summary: ''
+      operationId: getApiCalls
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                example:
+                  -
+                    id: 1
+                    customer_name: Ahmad
+                    maintenance_technician_id: 2
+                    emergency_id: 2
+                    floor_number: 10
+                    apartment_number: '263'
+                    problems_descrption: cscs
+                    problems_evel: 3
+                    stuts: 'In Progress'
+                    created_at: '2023-09-27T07:17:14.000000Z'
+                    updated_at: '2023-09-27T07:17:14.000000Z'
+                    maintenance_technician:
+                      id: 2
+                      name: ahmad
+                      email: ahmafd@gmail.com
+                      phone: 0
+                      password: $2y$10$EoXES2V2A1rJolveLxug9uKlch93bzKyZ52FtKn4SZ/a8yWwDR66i
+                      image: /maintenance_image/6513cf54cfc0c_maintenance_image.jpg
+                      stuts: '0'
+                      created_at: '2023-09-27T06:44:36.000000Z'
+                      updated_at: '2023-09-27T06:44:36.000000Z'
+                    emergency:
+                      id: 2
+                      image: /emergency_images/6513cd6edc0a3_emergency_image.jpg
+                      services: power
+                      created_at: '2023-09-27T06:36:30.000000Z'
+                      updated_at: '2023-09-27T06:36:30.000000Z'
+      tags:
+        - Endpoints
+      security: []
+    post:
+      summary: ''
+      operationId: postApiCalls
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                customer_name:
+                  type: string
+                  description: ''
+                  example: quo
+                floor_number:
+                  type: string
+                  description: ''
+                  example: excepturi
+                apartment_number:
+                  type: string
+                  description: ''
+                  example: id
+                problems_evel:
+                  type: string
+                  description: ''
+                  example: distinctio
+                problems_descrption:
+                  type: string
+                  description: ''
+                  example: voluptas
+                maintenance_technician_id:
+                  type: string
+                  description: ''
+                  example: quo
+                emergency_id:
+                  type: string
+                  description: ''
+                  example: repellat
+              required:
+                - customer_name
+                - floor_number
+                - apartment_number
+                - problems_evel
+                - problems_descrption
+                - maintenance_technician_id
+                - emergency_id
+      security: []
+  '/api/calls/{call}':
+    get:
+      summary: ''
+      operationId: getApiCallsCall
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: null
+                    customer_name: null
+                    floor_number: null
+                    apartment_number: null
+                    problems_descrption: null
+                    problems_evel: null
+                    maintenance_technician_id: null
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: null
+                      customer_name:
+                        type: string
+                        example: null
+                      floor_number:
+                        type: string
+                        example: null
+                      apartment_number:
+                        type: string
+                        example: null
+                      problems_descrption:
+                        type: string
+                        example: null
+                      problems_evel:
+                        type: string
+                        example: null
+                      maintenance_technician_id:
+                        type: string
+                        example: null
+      tags:
+        - Endpoints
+      security: []
+    delete:
+      summary: ''
+      operationId: deleteApiCallsCall
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: call
+        description: 'The call.'
+        example: vel
+        required: true
+        schema:
+          type: string
+  /api/maintenances:
+    get:
+      summary: ''
+      operationId: getApiMaintenances
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      id: 1
+                      name: ahmad
+                      image: /maintenance_image/6513cf2b8c88c_maintenance_image.jpg
+                      phone: 1
+                      stuts: '0'
+                      relationship:
+                        EmergencyServices: []
+                    -
+                      id: 2
+                      name: ahmad
+                      image: /maintenance_image/6513cf54cfc0c_maintenance_image.jpg
+                      phone: 0
+                      stuts: '0'
+                      relationship:
+                        EmergencyServices:
+                          -
+                            id: 2
+                            services: power
+                            image: /emergency_images/6513cd6edc0a3_emergency_image.jpg
+                    -
+                      id: 3
+                      name: zz
+                      image: /maintenance_image/6513d0a5866f8_maintenance_image.jpg
+                      phone: 4
+                      stuts: '0'
+                      relationship:
+                        EmergencyServices:
+                          -
+                            id: 2
+                            services: power
+                            image: /emergency_images/6513cd6edc0a3_emergency_image.jpg
+                    -
+                      id: 4
+                      name: zz
+                      image: /maintenance_image/6513d4bb16a00_maintenance_image.jpg
+                      phone: 43
+                      stuts: '0'
+                      relationship:
+                        EmergencyServices:
+                          -
+                            id: 2
+                            services: power
+                            image: /emergency_images/6513cd6edc0a3_emergency_image.jpg
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 1
+                        name: ahmad
+                        image: /maintenance_image/6513cf2b8c88c_maintenance_image.jpg
+                        phone: 1
+                        stuts: '0'
+                        relationship:
+                          EmergencyServices: []
+                      -
+                        id: 2
+                        name: ahmad
+                        image: /maintenance_image/6513cf54cfc0c_maintenance_image.jpg
+                        phone: 0
+                        stuts: '0'
+                        relationship:
+                          EmergencyServices:
+                            -
+                              id: 2
+                              services: power
+                              image: /emergency_images/6513cd6edc0a3_emergency_image.jpg
+                      -
+                        id: 3
+                        name: zz
+                        image: /maintenance_image/6513d0a5866f8_maintenance_image.jpg
+                        phone: 4
+                        stuts: '0'
+                        relationship:
+                          EmergencyServices:
+                            -
+                              id: 2
+                              services: power
+                              image: /emergency_images/6513cd6edc0a3_emergency_image.jpg
+                      -
+                        id: 4
+                        name: zz
+                        image: /maintenance_image/6513d4bb16a00_maintenance_image.jpg
+                        phone: 43
+                        stuts: '0'
+                        relationship:
+                          EmergencyServices:
+                            -
+                              id: 2
+                              services: power
+                              image: /emergency_images/6513cd6edc0a3_emergency_image.jpg
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        name:
+                          type: string
+                          example: ahmad
+                        image:
+                          type: string
+                          example: /maintenance_image/6513cf2b8c88c_maintenance_image.jpg
+                        phone:
+                          type: integer
+                          example: 1
+                        stuts:
+                          type: string
+                          example: '0'
+                        relationship:
+                          type: object
+                          properties:
+                            EmergencyServices:
+                              type: array
+                              example: []
+      tags:
+        - Endpoints
+      security: []
+    post:
+      summary: ''
+      operationId: postApiMaintenances
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: ''
+                  example: eius
+                email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: ipacocha@example.org
+                phone:
+                  type: string
+                  description: 'Must not be greater than 100 characters.'
+                  example: iosxxpvlfgyujunz
+                password:
+                  type: string
+                  description: 'Must be at least 7 characters.'
+                  example: 'C0:<p*'
+                image:
+                  type: string
+                  format: binary
+                  description: 'Must be an image. Must not be greater than 2048 kilobytes.'
+                stuts:
+                  type: string
+                  description: ''
+                  example: officiis
+              required:
+                - name
+                - email
+                - phone
+                - password
+                - image
+                - stuts
+      security: []
+  '/api/maintenances/{maintenance}':
+    get:
+      summary: ''
+      operationId: getApiMaintenancesMaintenance
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: null
+                    name: null
+                    image: null
+                    phone: null
+                    stuts: null
+                    relationship:
+                      EmergencyServices: []
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: null
+                      name:
+                        type: string
+                        example: null
+                      image:
+                        type: string
+                        example: null
+                      phone:
+                        type: string
+                        example: null
+                      stuts:
+                        type: string
+                        example: null
+                      relationship:
+                        type: object
+                        properties:
+                          EmergencyServices:
+                            type: array
+                            example: []
+      tags:
+        - Endpoints
+      security: []
+    delete:
+      summary: ''
+      operationId: deleteApiMaintenancesMaintenance
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: maintenance
+        description: 'The maintenance.'
+        example: voluptatum
+        required: true
+        schema:
+          type: string
+  /api/posts:
+    get:
+      summary: ''
+      operationId: getApiPosts
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      id: 1
+                      title: dcc
+                      relationship:
+                        Images: []
+                    -
+                      id: 2
+                      title: dcc
+                      relationship:
+                        Images:
+                          -
+                            id: 1
+                            image: /post_image/6513d65755971_post_image.jpg
+                            post_id: 2
+                            created_at: '2023-09-27T07:14:31.000000Z'
+                            updated_at: '2023-09-27T07:14:31.000000Z'
+                          -
+                            id: 2
+                            image: /post_image/6513d6575c7b2_post_image.jpg
+                            post_id: 2
+                            created_at: '2023-09-27T07:14:31.000000Z'
+                            updated_at: '2023-09-27T07:14:31.000000Z'
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 1
+                        title: dcc
+                        relationship:
+                          Images: []
+                      -
+                        id: 2
+                        title: dcc
+                        relationship:
+                          Images:
+                            -
+                              id: 1
+                              image: /post_image/6513d65755971_post_image.jpg
+                              post_id: 2
+                              created_at: '2023-09-27T07:14:31.000000Z'
+                              updated_at: '2023-09-27T07:14:31.000000Z'
+                            -
+                              id: 2
+                              image: /post_image/6513d6575c7b2_post_image.jpg
+                              post_id: 2
+                              created_at: '2023-09-27T07:14:31.000000Z'
+                              updated_at: '2023-09-27T07:14:31.000000Z'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        title:
+                          type: string
+                          example: dcc
+                        relationship:
+                          type: object
+                          properties:
+                            Images:
+                              type: array
+                              example: []
+      tags:
+        - Endpoints
+      security: []
+    post:
+      summary: ''
+      operationId: postApiPosts
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: ''
+                  example: omnis
+              required:
+                - title
+      security: []
+  /api/recentlyadd:
+    get:
+      summary: ''
+      operationId: getApiRecentlyadd
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                example:
+                  -
+                    id: 2
+                    title: dcc
+                    created_at: '2023-09-27T07:14:31.000000Z'
+                    updated_at: '2023-09-27T07:14:31.000000Z'
+                  -
+                    id: 1
+                    title: dcc
+                    created_at: '2023-09-26T07:13:57.000000Z'
+                    updated_at: '2023-09-27T07:13:57.000000Z'
+      tags:
+        - Endpoints
+      security: []
+  /api/gettodaysposts:
+    get:
+      summary: ''
+      operationId: getApiGettodaysposts
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                example: []
+      tags:
+        - Endpoints
+      security: []
+  /api/hosts:
+    get:
+      summary: ''
+      operationId: getApiHosts
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      id: 1
+                      type: host
+                      host_number: 1
+                      apartment_number: 1
+                      floor_number: 1
+                      from: 2am
+                      to: 3am
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 1
+                        type: host
+                        host_number: 1
+                        apartment_number: 1
+                        floor_number: 1
+                        from: 2am
+                        to: 3am
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        type:
+                          type: string
+                          example: host
+                        host_number:
+                          type: integer
+                          example: 1
+                        apartment_number:
+                          type: integer
+                          example: 1
+                        floor_number:
+                          type: integer
+                          example: 1
+                        from:
+                          type: string
+                          example: 2am
+                        to:
+                          type: string
+                          example: 3am
+      tags:
+        - Endpoints
+      security: []
+    post:
+      summary: ''
+      operationId: postApiHosts
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  description: ''
+                  example: et
+                host_number:
+                  type: string
+                  description: ''
+                  example: et
+                apartment_number:
+                  type: string
+                  description: ''
+                  example: non
+                floor_number:
+                  type: string
+                  description: ''
+                  example: porro
+                from:
+                  type: string
+                  description: ''
+                  example: numquam
+                to:
+                  type: string
+                  description: ''
+                  example: rerum
+              required:
+                - type
+                - host_number
+                - apartment_number
+                - floor_number
+                - from
+                - to
+      security: []
+  /api/history:
+    get:
+      summary: ''
+      operationId: getApiHistory
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                example:
+                  -
+                    id: 1
+                    emergency_id: 2
+                    title: cscs
+                    stuts: 'In Progress'
+                    created_at: '2023-09-27T07:17:14.000000Z'
+                    updated_at: '2023-09-27T07:17:14.000000Z'
+                    emergency:
+                      id: 2
+                      image: /emergency_images/6513cd6edc0a3_emergency_image.jpg
+                      services: power
+                      created_at: '2023-09-27T06:36:30.000000Z'
+                      updated_at: '2023-09-27T06:36:30.000000Z'
+      tags:
+        - Endpoints
+      security: []
+  /api/recently:
+    get:
+      summary: ''
+      operationId: getApiRecently
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                example:
+                  -
+                    id: 1
+                    emergency_id: 2
+                    title: cscs
+                    stuts: 'In Progress'
+                    created_at: '2023-09-27T07:17:14.000000Z'
+                    updated_at: '2023-09-27T07:17:14.000000Z'
+      tags:
+        - Endpoints
+      security: []
+  /api/homes:
+    get:
+      summary: ''
+      operationId: getApiHomes
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                example:
+                  -
+                    id: 2
+                    tenant_name: Ali
+                    apartment_number: '1'
+                    apartment_name: 'Part 1'
+                    floor: '3'
+                    created_at: '2023-09-27T07:12:32.000000Z'
+                    updated_at: '2023-09-27T07:12:32.000000Z'
+      tags:
+        - Endpoints
+      security: []
+    post:
+      summary: ''
+      operationId: postApiHomes
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tenant_name:
+                  type: string
+                  description: ''
+                  example: nam
+                apartment_number:
+                  type: string
+                  description: ''
+                  example: quae
+                apartment_name:
+                  type: string
+                  description: ''
+                  example: nesciunt
+                floor:
+                  type: string
+                  description: ''
+                  example: fuga
+              required:
+                - tenant_name
+                - apartment_number
+                - apartment_name
+                - floor
+      security: []
+  '/api/homes/{home_id}':
+    post:
+      summary: ''
+      operationId: postApiHomesHome_id
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    get:
+      summary: ''
+      operationId: getApiHomesHome_id
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 2
+                    tenant_name: Ali
+                    apartment_number: '1'
+                    apartment_name: 'Part 1'
+                    floor: '3'
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 2
+                      tenant_name:
+                        type: string
+                        example: Ali
+                      apartment_number:
+                        type: string
+                        example: '1'
+                      apartment_name:
+                        type: string
+                        example: 'Part 1'
+                      floor:
+                        type: string
+                        example: '3'
+      tags:
+        - Endpoints
+      security: []
+    delete:
+      summary: ''
+      operationId: deleteApiHomesHome_id
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: home_id
+        description: 'The ID of the home.'
+        example: 2
+        required: true
+        schema:
+          type: integer
+  /api/email-verification:
+    post:
+      summary: ''
+      operationId: postApiEmailVerification
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: breana97@example.org
+                otp:
+                  type: string
+                  description: 'Must not be greater than 6 characters.'
+                  example: svso
+              required:
+                - email
+                - otp
+      security: []
+  /api/forget-password:
+    post:
+      summary: ''
+      operationId: postApiForgetPassword
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: kemmer.filomena@example.org
+              required:
+                - email
+      security: []
+  /api/reset-password:
+    post:
+      summary: ''
+      operationId: postApiResetPassword
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: bahringer.ollie@example.com
+                otp:
+                  type: string
+                  description: 'Must not be greater than 6 characters.'
+                  example: cbgd
+                password:
+                  type: string
+                  description: 'Must be at least 6 characters.'
+                  example: '^xUSC#Fb8<'
+              required:
+                - email
+                - otp
+                - password
+      security: []
+  /api/IndexConversation:
+    get:
+      summary: ''
+      operationId: getApiIndexConversation
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: 'Authorization Token not found'
+                properties:
+                  status:
+                    type: string
+                    example: 'Authorization Token not found'
+      tags:
+        - Endpoints
+      security: []
+  /api/ShowConversation:
+    get:
+      summary: ''
+      operationId: getApiShowConversation
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: 'Authorization Token not found'
+                properties:
+                  status:
+                    type: string
+                    example: 'Authorization Token not found'
+      tags:
+        - Endpoints
+      security: []
+  /api/NumberOfUnreadMessage:
+    get:
+      summary: ''
+      operationId: getApiNumberOfUnreadMessage
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: 'Authorization Token not found'
+                properties:
+                  status:
+                    type: string
+                    example: 'Authorization Token not found'
+      tags:
+        - Endpoints
+      security: []
+  /api/markAsRead:
+    put:
+      summary: ''
+      operationId: putApiMarkAsRead
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/CreateMessage:
+    post:
+      summary: ''
+      operationId: postApiCreateMessage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+tags:
+  -
+    name: Endpoints
+    description: ''

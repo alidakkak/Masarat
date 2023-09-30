@@ -47,6 +47,11 @@ class MaintenanceTechnicianController extends Controller
         return HistoryService::with('emergency')->get();
     }
 
+    public function recentlyAdd() {
+        $recently = HistoryService::latest()->take(5)->get();
+        return $recently;
+    }
+
     public function index() {
         $maint = MaintenanceTechnician::all();
         return MaintenanceTechnicianResource::collection($maint);

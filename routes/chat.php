@@ -25,6 +25,7 @@ Route::group(["middleware"=>'check_user:admin,normal'],function (){
     Route::get("/ShowConversation",[ConversationController::class,'show']);
     Route::get("/NumberOfUnreadMessage",[ConversationController::class,'NumberOfUnreadMessage']);
     Route::put("/markAsRead",[ConversationController::class,'markAsRead']);
+    Route::delete("/message{id}",[ConversationController::class,'delete']);
     // messages
     Route::post("/CreateMessage",[MessageController::class,'store']);
 });

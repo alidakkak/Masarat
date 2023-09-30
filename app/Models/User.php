@@ -17,14 +17,7 @@ class User extends Authenticatable implements JWTSubject
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'phone',
-        'password',
-        'code',
-        'expired_at'
-    ];
+    protected $guarded = ['id'];
 
 
     protected $hidden = [
@@ -70,6 +63,12 @@ class User extends Authenticatable implements JWTSubject
         $this->code = null;
         $this->expired_at = null;
         $this->save();
+    }
+
+    public function setImageAttribute ($image){
+        $newImageName = uniqid() . '_' . 'post_image' . '.' . $image->extension();
+        $image->move(public_path('post_image') , $newImageName);
+        return $this->attributes['image'] =  '/'.'post_image'.'/' . $newImageName;
     }
 }
 
