@@ -14,7 +14,7 @@ class EmergencyResource extends JsonResource
         return [
             'id' => $this->id,
             'services' => $this->services,
-            'image' => $this->image,
+            'image' => asset($this->image),
             // 'relationship' => [
             //     'MaintenanceTechnician' =>
             //      MaintenanceTechnicianResource::collection(MaintenanceTechnician::whereHas('emergencyMaintenance' , fn($query) => 

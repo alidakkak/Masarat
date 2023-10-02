@@ -84,10 +84,23 @@ class AuthController extends Controller
     //      return $this->createNewToken(auth()->refresh());
     //  }
 
-
-    public function userProfile() {
-        return response()->json(auth()->user());
-    }
+    
+public function userProfile() {
+    return response()->json(
+         [
+           'id' => auth()->user()->id,
+           'name' => auth()->user()->name,
+           'email' => auth()->user()->email,
+           'phone' => auth()->user()->phone,
+           'address' => auth()->user()->address,
+           'image' => asset(auth()->user()->image),
+           'type' => auth()->user()->type,
+           'code' => auth()->user()->code,
+           'created_at' => auth()->user()->created_at,
+           'updated_at' => auth()->user()->updated_at,
+      ]
+    );
+}
 
     
      protected function createNewToken($token){

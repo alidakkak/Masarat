@@ -19,7 +19,12 @@ class PostResource extends JsonResource
             'id' => $this->id,
             'title' =>$this->title,
             'relationship' => [
-                'Images' => $this->images,
+                 'Images' => $this->images->map(function($item){
+                    return ([
+                        $item->id,
+                        asset($item->image),
+                    ]);
+                 }),
             ]
         ];
     }

@@ -66,9 +66,9 @@ class User extends Authenticatable implements JWTSubject
     }
 
     public function setImageAttribute ($image){
-        $newImageName = uniqid() . '_' . 'post_image' . '.' . $image->extension();
-        $image->move(public_path('post_image') , $newImageName);
-        return $this->attributes['image'] =  '/'.'post_image'.'/' . $newImageName;
+        $newImageName = uniqid() . '_' . 'profile_image' . '.' . $image->extension();
+        $image->move(public_path('profile_image') , $newImageName);
+        return $this->attributes['image'] =  '/'.'profile_image'.'/' . $newImageName;
     }
 }
 
