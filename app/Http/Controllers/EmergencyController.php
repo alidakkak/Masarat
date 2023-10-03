@@ -53,12 +53,7 @@ class EmergencyController extends Controller
     function search(Request $request)
     {
         $result = Emergency::where('services', '=', $request->services)->get();
-        if(count($result)){
-         return Response()->json($result);
-        } else
-        {
-        return response()->json(['Result' => 'No Data not found'], 404);
-      }
+         return EmergencyResource::collection($result);
     }
 
 }

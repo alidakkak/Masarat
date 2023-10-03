@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('type');
             $table->double('host_number');
-            $table->double('apartment_number');
-            $table->double('floor_number');
+            $table->string('apartment_number');
+            $table->string('floor_number');
             $table->string('from');
             $table->string('to');
             $table->timestamps();

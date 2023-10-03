@@ -14,6 +14,7 @@ class EmergencyResource extends JsonResource
         return [
             'id' => $this->id,
             'services' => $this->services,
+            'description' => $this->description,
             'image' => asset($this->image),
             // 'relationship' => [
             //     'MaintenanceTechnician' =>

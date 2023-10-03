@@ -24,6 +24,7 @@ class StoreEmergencyRequest extends FormRequest
     {
         return [
             'services' => 'required|string',
+            'description' => 'required|string',
             'image' => 'image|mimes:jpg,png,jpeg|max:2048',
             'maintenance_technician_ids' => 'array',
             'maintenance_technician_ids.*' => [Rule::exists('maintenance_technicians' , 'id')]
