@@ -8,7 +8,6 @@ use App\Http\Requests\StoreMaintenanceTechnicianRequest;
 use App\Http\Resources\MaintenanceTechnicianResource;
 use App\Models\EmergencyMaintenance;
 use Illuminate\Support\Facades\Validator;
-use App\Models\HistoryService;
 use App\Models\MaintenanceTechnician;
 use Illuminate\Http\Request;
 
@@ -42,15 +41,6 @@ class MaintenanceTechnicianController extends Controller
         ]);
     }
 
-
-    public function getHistory(){
-        return HistoryService::with('emergency')->get();
-    }
-
-    public function recentlyAdd() {
-        $recently = HistoryService::latest()->take(5)->get();
-        return $recently;
-    }
 
     public function index() {
         $maint = MaintenanceTechnician::all();

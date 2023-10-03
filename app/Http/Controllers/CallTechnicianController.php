@@ -28,7 +28,6 @@ class CallTechnicianController extends Controller
 
         HistoryService::create([
              'emergency_id' => $requst->emergency_id,
-             'emergency' => $requst->emergency,
             'title' => $requst->problems_descrption,
         ]);
 

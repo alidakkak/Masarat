@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('emergency_id')->references('id')
             ->on('emergencies')->onDelete('cascade');
-            $table->string('emergency');
             $table->string('title');
             $table->string('stuts')->default('In Progress');
             $table->timestamps();

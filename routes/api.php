@@ -9,6 +9,7 @@ use App\Http\Controllers\ChatController;
 use App\Http\Controllers\EmailVerifyController;
 use App\Http\Controllers\EmergencyController;
 use App\Http\Controllers\ForgetPasswordController;
+use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HostController;
 use App\Http\Controllers\MaintenanceTechnicianController;
@@ -78,8 +79,9 @@ Route::post('/hosts',[HostController::class,'store']);
 
 ///// History
 
-Route::get('/history',[MaintenanceTechnicianController::class,'getHistory']);
-Route::get('/recently',[MaintenanceTechnicianController::class,'recentlyAdd']);
+Route::get('/history',[HistoryController::class,'getHistory']);
+Route::get('/recently',[HistoryController::class,'recentlyAdd']);
+Route::post('/filter',[HistoryController::class,'filter']);
 
 
 /////////dashboard/////Home
