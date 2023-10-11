@@ -15,6 +15,7 @@ class PostResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $this->load('user');
         return [
             'id' => $this->id,
             'title' =>$this->title,
@@ -26,7 +27,8 @@ class PostResource extends JsonResource
                         asset($item->image),
                     ]);
                  }),
-            ]
+            ],
+                        'user' => $this->user,
         ];
     }
 }

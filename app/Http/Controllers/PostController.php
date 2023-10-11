@@ -17,19 +17,27 @@ class PostController extends Controller
         return PostResource::collection($post);
     }
 
-    public function recentlyAdd() {
-        $recently = Post::latest()->take(5)->get();
-        return $recently;
-    }
+    public function recentlyAdd(Request $request) {
+        $status = intval($request->input('status'));
+        /// recentlyAdd
+        if($status === 1){
+            $recently = Post::latest()->take(5)->get();
+            return PostResource::collection($recently);
+        } else if ($status === 2) {  ///// getTodaysPosts
+            $today = Carbon::now()->format('Y-m-d');
+            $posts = Post::whereDate('created_at', $today)->get();
+            return PostResource::collection($posts);
+        } else {
+            return 'You Enter wrong value';
+        }
+}
 
-    public function getTodaysPosts() {
-
-        $today = Carbon::now()->format('Y-m-d');
-
-        $posts = Post::whereDate('created_at', $today)->get();
-
-        return response()->json($posts);
-    }
+//    public function getTodaysPosts() {
+//
+//        $today = Carbon::now()->format('Y-m-d');
+//        $posts = Post::whereDate('created_at', $today)->get();
+//        return response()->json($posts);
+//    }
 
     public function store(StorePostRequest $request) {
         $request->validated($request->all());
@@ -46,5 +54,5 @@ class PostController extends Controller
         }
         return PostResource::make($post);
     }
-    
+
 }

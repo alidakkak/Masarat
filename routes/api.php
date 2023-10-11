@@ -69,7 +69,7 @@ Route::delete('/maintenances/{maintenance}',[MaintenanceTechnicianController::cl
 
 Route::get('/posts',[PostController::class,'index']);
 Route::post('/posts',[PostController::class,'store']);
-Route::get('/recentlyadd',[PostController::class,'recentlyAdd']);
+Route::post('/recentlyadd',[PostController::class,'recentlyAdd']);
 Route::get('/gettodaysposts',[PostController::class,'getTodaysPosts']);
 
 //// Hosts

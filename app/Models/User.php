@@ -19,7 +19,9 @@ class User extends Authenticatable implements JWTSubject
      */
     protected $guarded = ['id'];
 
-
+    public function post() {
+        return $this->hasMany(Post::class);
+    }
     protected $hidden = [
         'password',
         'remember_token',
