@@ -13,9 +13,11 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
     public function index() {
-        $post = Post::with('images')->paginate(10);
+        $post = Post::with('images')->latest()->paginate(2);
         return PostResource::collection($post);
     }
+
+
 
     public function recentlyAdd(Request $request) {
         $status = intval($request->input('status'));
