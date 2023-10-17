@@ -4,6 +4,9 @@ namespace App\Http\Controllers\chat;
 
 use App\Http\Controllers\Controller;
 use App\Models\Conversation;
+use App\Models\Member;
+use App\Models\Message;
+use App\Models\Post;
 use App\Models\Recipient;
 use App\Traits\GeneralTrait;
 use App\Transformers\IndexTransformer;
@@ -15,6 +18,7 @@ use Illuminate\Support\Facades\Auth;
 class ConversationController extends Controller
 {
     use GeneralTrait;
+
     public function index()
     {
         $user = Auth::user();
@@ -79,7 +83,8 @@ class ConversationController extends Controller
         return $this->returnData("message", 'Messages marked as read');
     }
 
-    public function delete($id) {
+    public function delete($id)
+    {
         Recipient::where([
             'user_id' => Auth::id(),
             'message_id' => $id
@@ -87,5 +92,37 @@ class ConversationController extends Controller
         return [
             'message' => 'Deleted SuccesFully'
         ];
+    }
+
+    public function getconversation(Request $request){
+
+        $post = Post::find($request->post_id);
+        $post_owner= $post->user()->select('id','name',"phone","address","email","type","image")->first();
+        $user = Auth::user();
+        $conversation_Id =
+            Member::Join("members as m2","m2.conversation_id","=","members.conversation_id")
+                ->select(["members.conversation_id"])->
+                where("m2.user_id",$post_owner->id)->
+                where("members.user_id",$user->id)
+                ->limit(1)->pluck("conversation_id") [0] ?? null ;
+        if(!$conversation_Id){
+            return response()->json([
+                'status' => 200,
+                "poster_owner"=>$post_owner,
+                "count_messages"=>0
+            ]);
+        }
+        $conversation = Conversation::findOrFail($conversation_Id);
+        $messages = $conversation->messages()->with('sender')->orderByDesc("id")->get();
+        $MessageTransformer = [];
+        foreach ($messages as $index => $message) {
+            $MessageTransformer[$index] = fractal($message, new MessageTransformer())->toArray();
+            $MessageTransformer[$index] = $MessageTransformer[$index]["data"];
+        }
+        return response()->json([
+            'status' => 200,
+            "poster_owner"=>$post_owner,
+            "count_messages"=> $messages->count(),
+            "messages"=> $MessageTransformer ]);
     }
 }

@@ -24,7 +24,6 @@ class PostResource extends JsonResource
             'relationship' => [
                  'Images' => $this->images->map(function($item){
                     return ([
-                        $item->id,
                         asset($item->image),
                     ]);
                  }),
