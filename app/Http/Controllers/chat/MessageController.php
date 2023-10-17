@@ -49,7 +49,7 @@ class MessageController extends Controller
                 $file=  $request->file("attachment");
                 $path="assets/chat_attachment";
                 $name=$file->getClientOriginalName();
-                $body_message=  uploade_image($name,$path,$file);
+                $body_message = uploade_image($name,$path,$file);
             }
             $message = $conversation
                     ->messages()
