@@ -32,7 +32,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/loginmaint', [MaintenanceTechnicianController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 
-Route::group(['middleware' => 'jwt.auth'], function () {
+//Route::group(['middleware' => 'jwt.auth'], function () {
 
 //////// Auth
 Route::post('/users/{user}',[AuthController::class, 'update']);
@@ -92,7 +92,7 @@ Route::post('/homes/{home}',[HomeController::class, 'update']);
 Route::get('/homes/{home}',[HomeController::class, 'show']);
 Route::delete('/homes/{home}',[HomeController::class, 'destroy']);
 
-});
+//});
 
 
 Route::post('/email-verification',[EmailVerifyController::class,'emailVerification']);

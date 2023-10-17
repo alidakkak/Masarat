@@ -12,7 +12,7 @@ class CheckUser
     public function handle(Request $request, Closure $next,...$roles)
     {
         try {
-            $token = $request->header('token');
+            $token = $request->header('Authorization');
             $request->headers->set('auth-token', (string) $token, true);
             $request->headers->set('Authorization', 'Bearer '.$token, true);
             $user = JWTAuth::parseToken()->authenticate();
