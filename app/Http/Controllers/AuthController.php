@@ -84,7 +84,7 @@ class AuthController extends Controller
     //      return $this->createNewToken(auth()->refresh());
     //  }
 
-    
+
 public function userProfile() {
     return response()->json(
          [
@@ -93,7 +93,7 @@ public function userProfile() {
            'email' => auth()->user()->email,
            'phone' => auth()->user()->phone,
            'address' => auth()->user()->address,
-           'image' => asset(auth()->user()->image),
+           'image' => auth()->user()->image?asset(auth()->user()->image):null,
            'type' => auth()->user()->type,
            'code' => auth()->user()->code,
            'created_at' => auth()->user()->created_at,
@@ -102,7 +102,7 @@ public function userProfile() {
     );
 }
 
-    
+
      protected function createNewToken($token){
          return response()->json([
              'access_token' => $token,

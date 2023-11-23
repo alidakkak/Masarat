@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\chat;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
 use App\Models\Conversation;
 use App\Models\Member;
 use App\Models\Message;
 use App\Models\Post;
 use App\Models\Recipient;
+use App\Models\User;
 use App\Traits\GeneralTrait;
 use App\Transformers\IndexTransformer;
 use App\Transformers\MessageTransformer;
@@ -48,8 +50,24 @@ class ConversationController extends Controller
 
 
     public function show(Request $request)
-    {
-        $conversation_id = $request->conversation_id;
+    {   $admin=User::where('type','admin')->first();
+        if (!$admin){
+            return $this->returnError(404,"admin is not found in this system");
+        }
+        $user = Auth::user();
+        $conversation_id =
+            Member::Join("members as m2","m2.conversation_id","=","members.conversation_id")
+                ->select(["members.conversation_id"])->
+                where("m2.user_id",$admin->id)->
+                where("members.user_id",$user->id)
+                ->limit(1)->pluck("conversation_id") [0] ?? null ;
+        if(!$conversation_id){
+            return response()->json([
+                'status' => 200,
+                "count_messages"=>0,
+                "admin"=> UserResource::make($admin),
+            ]);
+        }
         $conversation = Conversation::findOrFail($conversation_id);
         $messages = $conversation->messages()->with('sender')->orderByDesc("id")->get();
         $MessageTransformer = [];
@@ -57,13 +75,18 @@ class ConversationController extends Controller
             $MessageTransformer[$index] = fractal($message, new MessageTransformer())->toArray();
             $MessageTransformer[$index] = $MessageTransformer[$index]["data"];
         }
-        return $this->returnData("messages", $MessageTransformer, "count_messages", $messages->count());
+        return response()->json([
+            'status' => 200,
+            "count_messages"=> $messages->count(),
+            "admin"=> UserResource::make($admin),
+            "conversation"=> $conversation,
+            'messages'=>$MessageTransformer,
+        ]);
     }
 
 
     public function NumberOfUnreadMessage()
     {
-
         $user = Auth::user();
         $unread_message = $user->unreadmessage();
         return $this->returnData("Number_Of_Unread_Messages", $unread_message);

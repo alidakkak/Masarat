@@ -15,10 +15,10 @@ class EmergencyResource extends JsonResource
             'id' => $this->id,
             'services' => $this->services,
             'description' => $this->description,
-            'image' => asset($this->image),
+            'image' => $this->image?asset($this->image):null,
             // 'relationship' => [
             //     'MaintenanceTechnician' =>
-            //      MaintenanceTechnicianResource::collection(MaintenanceTechnician::whereHas('emergencyMaintenance' , fn($query) => 
+            //      MaintenanceTechnicianResource::collection(MaintenanceTechnician::whereHas('emergencyMaintenance' , fn($query) =>
             //         $query->where('emergency_id' , $this->id)
             //     )->get()),
             // ]

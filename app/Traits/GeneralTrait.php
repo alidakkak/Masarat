@@ -12,8 +12,8 @@ return app()->getLocale();
 public function returnError($errNum, $msg)
 {
 return response()->json([
-'status' => false,
-'errNum' => $errNum,
+
+'status' => $errNum,
 'msg' => $msg
 ]);
 }
