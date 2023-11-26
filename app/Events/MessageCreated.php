@@ -40,7 +40,7 @@ class MessageCreated implements ShouldBroadcast
 
     public function broadcastOn()
     {
-        return new PresenceChannel('Messenger.'.$this->recipient);
+        return new Channel('Messenger.'.$this->recipient);
     }
 
     public function broadcastAs()
